@@ -39,12 +39,15 @@ class TodoController extends Controller
         //$timeszone = ('Asia/Karachi');
 
         $todos= Todo::all();
-        $i = 0;
-        foreach($todos as $row)
+        if(!empty($todos))
         {
-            $todos[$i]->deadline = Carbon::createFromFormat('Y-m-d H:i:s', $row->deadline, 'UTC')
-            ->setTimezone($timeszone);
-        $i++;
+            $i = 0;
+            foreach($todos as $row)
+            {
+                $todos[$i]->deadline = Carbon::createFromFormat('Y-m-d H:i:s', $row->deadline, 'UTC')
+                ->setTimezone($timeszone);
+            $i++;
+            }
         }
 
         return view('todo', compact('todos', 'timeszone'));
