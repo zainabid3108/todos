@@ -16,7 +16,7 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255);
-            $table->dateTime('deadline');
+            $table->timestamp('deadline');
             $table->string('timezone', 30);
             $table->timestamps();
         });

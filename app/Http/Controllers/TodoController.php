@@ -21,7 +21,7 @@ class TodoController extends Controller
             $todo = new Todo;
 
             $todo->name = $name;
-            $todo->deadline = $deadline;
+            $todo->deadline = Carbon::parse($deadline, $timeszone)->setTimezone('UTC');
             $todo->timezone = $timeszone;
 
             $todo->save();
@@ -30,13 +30,12 @@ class TodoController extends Controller
     }
     function todos()
     {
-        $ip = $_SERVER['REMOTE_ADDR']; //"189.240.194.147";
+        $ip = '101.50.127.255'; //"189.240.194.147"; //101.50.127.255 //49.15.255.255
         $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
         $ipInfo = json_decode($ipInfo);
         $timezone = $ipInfo->timezone;
         date_default_timezone_set($timezone);
         $timeszone = date_default_timezone_get();
-        //$timeszone = ('Asia/Karachi');
 
         $todos= Todo::all();
         if(!empty($todos))
