@@ -30,7 +30,7 @@ class TodoController extends Controller
     }
     function todos()
     {
-        $ip = '101.50.127.255'; //"189.240.194.147"; //101.50.127.255 //49.15.255.255
+        $ip = $_SERVER['REMOTE_ADDR']; //"189.240.194.147"; //101.50.127.255 //49.15.255.255 //$_SERVER['REMOTE_ADDR']
         $ipInfo = file_get_contents('http://ip-api.com/json/' . $ip);
         $ipInfo = json_decode($ipInfo);
         $timezone = $ipInfo->timezone;
